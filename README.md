@@ -1,5 +1,11 @@
 [![CI](https://github.com/mebaysan/Turkey-Earthquake-Crisis-App/actions/workflows/ci.yml/badge.svg)](https://github.com/mebaysan/Turkey-Earthquake-Crisis-App/actions/workflows/ci.yml) [![Update Docker Hub Description](https://github.com/mebaysan/Turkey-Earthquake-Crisis-App/actions/workflows/dockerhub-description.yml/badge.svg)](https://github.com/mebaysan/Turkey-Earthquake-Crisis-App/actions/workflows/dockerhub-description.yml)
 
+
+- [Introduction](#introduction)
+- [Docker Image on the Hub](#docker-image-on-the-hub)
+- [Manual](#manual)
+- [Gallery](#gallery)
+
 # Introduction
 
 I've created this [repo](https://github.com/mebaysan/Turkey-Earthquake-Crisis-App) to present a minimal crisis map for earhquakes in Turkey.
@@ -23,3 +29,8 @@ docker run -p 8080:8080 mebaysan/turkey-earthquake-crisis-app
 # for dark mode
 docker run -p 8080:8080 -e STREAMLIT_THEME_BASE=dark mebaysan/turkey-earthquake-crisis-app
 ```
+
+# Gallery
+
+![Introduction](assets/1.png)
+![Raw Data](assets/2.png)

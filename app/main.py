@@ -90,5 +90,4 @@ st.write(
 
 fig = get_crisis_map(CAT_SIZE_ENUM[cat_size].value, filtered_data)
 
-# st.plotly_chart(fig)
-st.write(fig)
+st.plotly_chart(fig)
