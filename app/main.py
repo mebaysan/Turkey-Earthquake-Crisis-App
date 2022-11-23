@@ -109,14 +109,13 @@ fig_main_dots = go.Scattermapbox(
     name="Crisis Point",
     hovertemplate="<b>Crisis Point</b><br><br>"
     + '<span style="color: #e63946; font-size: 20px;">⏺</span>Date:<b>%{customdata[0]}</b><br>'
-    + "Location: <b>%{customdata[1]} </b><br>"
-    + "Depth: <b>%{customdata[2]} </b><br>"
-    + cat_size +": <b>%{customdata[3]} </b><br>",
-    customdata=[
-        filtered_data["date"],
-        filtered_data["location"],
-        filtered_data["depth"],
-        filtered_data[CAT_SIZE_ENUM[cat_size].value],
+    + "Time: <b>%{customdata[1]} </b><br>"
+    + "Location: <b>%{customdata[2]} </b><br>"
+    + "Depth: <b>%{customdata[3]} </b><br>"
+    + cat_size
+    + ": <b>%{customdata[4]} </b><br>",
+    customdata=filtered_data[
+        ["date", "time", "location", "depth", CAT_SIZE_ENUM[cat_size].value]
     ],
 )
 map = go.Figure([fig_highlight_dots, fig_main_dots])
