@@ -2,10 +2,9 @@ import streamlit as st
 import pandas as pd
 from scrapers.rasathane import get_json_data
 
+st.markdown("# Introduction 🎈")
 st.write(
     """
-    # Introduction
-
     I've created this repo to present a minimal crisis map for earhquakes in Turkey.
     Thanks for [BOGAZICI UNIVERSITY KANDILLI OBSERVATORY AND EARTHQUAKE RESEARCH INSTITUTE (KOERI)](http://www.koeri.boun.edu.tr/scripts/lasteq.asp) sharing the data.
 

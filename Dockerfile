@@ -12,8 +12,10 @@ RUN pip install -r requirements.txt
 
 COPY ./app/ /app/
 
+# change default port
 ENV STREAMLIT_SERVER_PORT=8080
 
+# change theme of the app
 ENV STREAMLIT_THEME_BASE=light
 
 EXPOSE 8080
