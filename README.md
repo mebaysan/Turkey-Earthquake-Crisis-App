@@ -1,3 +1,5 @@
+[![CI](https://github.com/mebaysan/Turkey-Earthquake-Crisis-App/actions/workflows/ci.yml/badge.svg)](https://github.com/mebaysan/Turkey-Earthquake-Crisis-App/actions/workflows/ci.yml)
+
 # Introduction
 
 I've created this repo to present a minimal crisis map for earhquakes in Turkey.
