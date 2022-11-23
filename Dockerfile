@@ -12,6 +12,10 @@ RUN pip install -r requirements.txt
 
 COPY ./app/ /app/
 
-EXPOSE 8501
+ENV STREAMLIT_SERVER_PORT=8080
+
+ENV STREAMLIT_THEME_BASE=light
+
+EXPOSE 8080
 
 CMD [ "streamlit", "run", "main.py" ]

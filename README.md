@@ -17,5 +17,9 @@ Explore Image on Docker Hub: [mebaysan/turkey-earthquake-crisis-app](https://hub
 # Manual
 
 ```bash
-docker run -p 8501:8501 mebaysan/turkey-earthquake-crisis-app
+# default running in light mode
+docker run -p 8080:8080 mebaysan/turkey-earthquake-crisis-app
+
+# for dark mode
+docker run -p 8080:8080 -e STREAMLIT_THEME_BASE=dark mebaysan/turkey-earthquake-crisis-app
 ```
