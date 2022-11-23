@@ -4,6 +4,10 @@ WORKDIR /app
 
 COPY ./requirements.txt /app/
 
+COPY ./Makefile /app/
+
+COPY ./.dockerignore /app/
+
 RUN pip install -r requirements.txt
 
 COPY ./app/ /app/
