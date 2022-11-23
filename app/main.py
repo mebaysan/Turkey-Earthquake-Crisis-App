@@ -2,8 +2,6 @@ import streamlit as st
 import pandas as pd
 from scrapers.rasathane import get_json_data
 
-eq_data = pd.DataFrame(get_json_data())
-
 st.write(
     """
     # Introduction
@@ -20,4 +18,14 @@ st.write(
 """
 )
 
-st.write(eq_data)
+EQ_DATA = pd.DataFrame(get_json_data())
+
+
+is_displayed_raw_data = st.sidebar.selectbox(
+    "Would you want to see the raw data?", options=("Yes", "No"), index=1
+)
+
+if is_displayed_raw_data == "Yes":
+    st.write(EQ_DATA)
+
+min_date = st.sidebar.date_input("Last Date (<=)")
