@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 from scrapers.rasathane import get_json_data
+from datetime import datetime
 
 st.markdown("# Introduction 🎈")
 st.write(
@@ -13,7 +14,7 @@ st.write(
 )
 
 EQ_DATA = pd.DataFrame(get_json_data())
-
+EQ_DATA["date"] = pd.to_datetime(EQ_DATA["date"], format="%Y.%m.%d")
 
 is_displayed_raw_data = st.sidebar.selectbox(
     "Would you want to see the raw data?", options=("Yes", "No"), index=0
@@ -23,4 +24,16 @@ if is_displayed_raw_data == "Yes":
     st.write("# Raw Data")
     st.write(EQ_DATA)
 
-min_date = st.sidebar.date_input("Last Date (<=)")
+min_date = st.sidebar.date_input("Last Date (>=)")
+
+st.write(
+    """
+    # Map of {} => Today
+""".format(
+        datetime.strftime(min_date, "%d/%m/%Y")
+    )
+)
+
+
+filtered_data = EQ_DATA[EQ_DATA["date"] >= pd.to_datetime(min_date)]
+
