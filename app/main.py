@@ -2,8 +2,13 @@ import streamlit as st
 import pandas as pd
 from scrapers.rasathane import get_json_data
 from datetime import datetime
-import plotly.graph_objects as go
 from enum import Enum
+from charts.map import get_crisis_map
+
+st.set_page_config(
+    page_title="Turkey Earthquake Crisis Map",
+    page_icon="💙",
+)
 
 
 @st.cache
@@ -28,7 +33,7 @@ EQ_DATA["filter_date"] = pd.to_datetime(EQ_DATA["date"], format="%Y.%m.%d")
 
 
 is_displayed_raw_data = st.sidebar.selectbox(
-    "Would you want to see the raw data?", options=("Yes", "No"), index=0
+    "Would you want to see the raw data?", options=("Yes", "No"), index=1
 )
 
 # date filter
@@ -75,7 +80,6 @@ if is_displayed_raw_data == "Yes":
         mime="text/csv",
     )
 
-
 st.write(
     """
     # Crisis Map 📍
@@ -84,54 +88,7 @@ st.write(
     )
 )
 
+fig = get_crisis_map(CAT_SIZE_ENUM[cat_size].value, filtered_data)
 
-fig_highlight_dots = go.Scattermapbox(
-    lat=filtered_data["latitude"],
-    lon=filtered_data["longitude"],
-    mode="markers",
-    marker=go.scattermapbox.Marker(
-        size=filtered_data[CAT_SIZE_ENUM[cat_size].value] * 6, color="#e63946"
-    ),
-    name="Highlight Markers",
-    opacity=0.5,
-    hovertemplate="",
-    hoverinfo="none",
-)
-
-fig_main_dots = go.Scattermapbox(
-    lat=filtered_data["latitude"],
-    lon=filtered_data["longitude"],
-    mode="markers",
-    marker=go.scattermapbox.Marker(
-        size=filtered_data[CAT_SIZE_ENUM[cat_size].value] * 3, color="#e63946"
-    ),
-    text=filtered_data["location"],
-    name="Crisis Point",
-    hovertemplate="<b>Crisis Point</b><br><br>"
-    + '<span style="color: #e63946; font-size: 20px;">⏺</span>Date:<b>%{customdata[0]}</b><br>'
-    + "Time: <b>%{customdata[1]} </b><br>"
-    + "Location: <b>%{customdata[2]} </b><br>"
-    + "Depth: <b>%{customdata[3]} </b><br>"
-    + cat_size
-    + ": <b>%{customdata[4]} </b><br>",
-    customdata=filtered_data[
-        ["date", "time", "location", "depth", CAT_SIZE_ENUM[cat_size].value]
-    ],
-)
-map = go.Figure([fig_highlight_dots, fig_main_dots])
-
-map.update_layout(
-    hovermode="closest",
-    hoverlabel={"bgcolor": "#FFF"},
-    mapbox_style="open-street-map",
-    showlegend=False,
-    mapbox=dict(
-        bearing=0,
-        center=go.layout.mapbox.Center(lat=38.963745, lon=35.243322),
-        pitch=0,
-        zoom=4.5,
-    ),
-    margin={"r": 0, "t": 0, "l": 0, "b": 0},
-)
-
-st.plotly_chart(map)
+# st.plotly_chart(fig)
+st.write(fig)
